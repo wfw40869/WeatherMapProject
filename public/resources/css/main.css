@@ -36,7 +36,7 @@ h1 { color: #fff; }
 h2{ 
     margin: 0 auto;
     font-size: 130%;
-    padding-top: 20px;
+    padding: 20px 0;
 }
 
 h3{
@@ -84,7 +84,6 @@ header .container .row { display: block; }
 
 
 /* FIVE DAY FORECAST */
-
 
 .weather-section {
     height: 100vh;
