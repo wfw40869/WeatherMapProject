@@ -23,7 +23,7 @@ var fiveDaySchema = mongoose.Schema([{
 
 var FiveDayForecast = mongoose.model("FiveDayForecast", fiveDaySchema);
     
-var url = process.env.DATABASEURL || "mongodb://localhost:27017/WeatherMap_v1";
+var url = process.env.DATABASEURL || "mongodb://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@ds029821.mlab.com:29821/weather_app_project";
 mongoose.connect(url, { useNewUrlParser: true });
 
 app.use(flash());
