@@ -78,7 +78,6 @@ app.post("/weather", function(req, res) {
                         res.redirect("/");
                     }
                     else {
-                        console.log("CREATED FORECAST!!!");
                         res.render("home", { fiveDay: newFiveDayForecast });
                     }
                 })
@@ -102,9 +101,6 @@ function clearDB() {
             db.collection('fivedayforecasts').deleteMany(function(err, result) {
                 if (err) {
                     console.log(err);
-                }
-                else {
-                    console.log("DB Cleared!!!");
                 }
             });
         }
