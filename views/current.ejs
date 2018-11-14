@@ -1,0 +1,15 @@
+<section class="current-weather-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h3><%= forecast.name %></h3>
+                <img src="https://openweathermap.org/img/w/<%= forecast.weather[0].icon %>.png" alt="Weather Icon">
+                <p><%= forecast.weather[0].description %></p>
+                <p>Current temp: <%= Math.round(forecast.main.temp) %>&deg;F</p>
+                <p>Min: <%= Math.round(forecast.main.temp_min) %>&deg;F Max: <%= Math.round(forecast.main.temp_max) %>&deg;F</p>
+                <p>Humidity: <%= forecast.main.humidity %>%</p>
+                <p>Wind: <%= forecast.wind.speed %>mph</p>
+            </div>
+        </div>
+    </div>
+</section>

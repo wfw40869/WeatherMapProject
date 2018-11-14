@@ -1,0 +1,56 @@
+ [
+    {
+        "id": 5128638,
+        "name": "New York",
+        "country": "US",
+        "coord": {
+          "lon": -75.499901,
+          "lat": 43.000351
+            }
+    },
+    {
+        "id": 4560349,
+        "name": "Philadelphia",
+        "country": "US",
+        "coord": {
+          "lon": -75.163788,
+          "lat": 39.952339
+            }
+    },
+    {
+        "id": 5368361,
+        "name": "Los Angeles",
+        "country": "US",
+        "coord": {
+          "lon": -118.243683,
+          "lat": 34.052231
+            }
+    },
+    {
+        "id": 4317656,
+        "name": "Boston",
+        "country": "US",
+        "coord": {
+          "lon": -92.055679,
+          "lat": 29.883261
+            }
+    },
+    {
+        "id": 4684888,
+        "name": "Dallas",
+        "country": "US",
+        "coord": {
+          "lon": -96.806671,
+          "lat": 32.783058
+        }
+  },
+  {
+        "id": 4174757,
+        "name": "Tampa",
+        "country": "US",
+        "coord": {
+          "lon": -82.458427,
+          "lat": 27.947519
+        }
+  }
+]

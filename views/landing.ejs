@@ -1,0 +1,28 @@
+<% include ./partials/header %>
+
+<header>
+    <div class="container">
+        <div class="row">
+            <% if(error && error.length > 0){ %>
+            <div class="alert alert-warning" role="alert" style="width: 30%; margin: 25px auto;">
+                    <%= error %>
+            </div>
+            <% } %>
+        </div>
+        <div class="row">
+            <h1>Find Your Local Weather</h1>
+        </div>
+        <div class="row">
+            <form action="/weather" method="POST">
+                <label for="zip"></label>
+                <input type="number" id="zip" name="zip" placeholder="Enter your zip code" required></input>
+                <input type="submit" value="Get Weather" class="btn btn-info" id="getWeatherForecast">
+            </form>
+        </div>
+    </div>
+</header>
+
+
+    
+<% include ./partials/footer %>
+    

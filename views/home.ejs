@@ -1,0 +1,31 @@
+<% include ./partials/header %>
+
+
+<section class="weather-section">
+    <div class="container">
+        <div class="row">
+            <h2><%= fiveDay.city.name %> 5-Day Weather Forecast</h2>
+        </div>
+        <div class="row">
+            <% for(var i = 0; i < fiveDay.list.length; i += 8) { %>
+                <div class="col-lg-2">
+                    <h3><%= moment(fiveDay.list[i].dt_txt).format("dddd") %>, <%= moment(fiveDay.list[i].dt_txt).format("MMM Do") %></h3>
+                    <img src="resources/img/icons/<%= fiveDay.list[i].weather[0].icon %>.png" alt="Weather Icon">
+                    <p>High: <span class="max"><%= fiveDay.list[i].main.temp_max %></span>&deg;</p>
+                    <p>Low: <span class="min"><%= fiveDay.list[i].main.temp_min %></span>&deg;</p>
+                </div>
+            <%  } %>
+        </div>
+        <div class="row">
+            <div class="col-xl" id="map">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    
+<% include ./partials/footer %>
+    
