@@ -1,0 +1,17 @@
+/* Small tablet to big tablet: 768-1023px */
+@media only screen and (max-width: 1023px) {
+     .navbar-light .navbar-brand{ font-size: 130%; }
+     #zip { font-size: 90%; }
+     #getWeatherForecast { font-size: 90%; }
+}
+
+/* Large phones to small tablets: 481-767px */
+@media only screen and (max-width: 768px) {
+    h1 { font-size: 170%; }
+    .navbar-light .navbar-brand { font-size: 100%; }
+}
+/* Medium phones and small phones: 320-375px */
+@media only screen and (max-width: 375px) {
+    h1 { font-size: 140%; }
+    .navbar-light .navbar-brand { font-size: 95%; }
+}
