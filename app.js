@@ -11,7 +11,7 @@ var express = require('express'),
     
 //SCHEMA SETUP
 
-var fiveDaySchema = mongoose.Schema([{
+var fiveDaySchema = mongoose.Schema({
    city: {},
    coord: {},
    country: String,
@@ -19,7 +19,7 @@ var fiveDaySchema = mongoose.Schema([{
    message: Number,
    cnt: Number,
    list: [{}]
-}]);
+});
 
 var FiveDayForecast = mongoose.model("FiveDayForecast", fiveDaySchema);
     
@@ -70,6 +70,7 @@ app.post("/weather", function(req, res) {
             }
             else {
                 FiveDayForecast.create(newFiveDayForecast, function(err, newlyCreated) {
+                    var minsAndMaxes;
                     if (err) {
                         req.flash("error", "Please enter a valid zip code!");
                         res.redirect("/");
@@ -78,7 +79,7 @@ app.post("/weather", function(req, res) {
                         res.redirect("/");
                     }
                     else {
-                        res.render("home", { fiveDay: newFiveDayForecast });
+                        res.render("home", { fiveDay: newFiveDayForecast, minsAndMaxes: findMinMax(newFiveDayForecast) });
                     }
                 })
             }
@@ -110,6 +111,37 @@ function clearDB() {
 function checkZip(zip) {
     return(/^[0-9]{5}(?:-[0-9]{4})?$/.test(zip));
 }
+
+//Find true min and max temperatures for each day
+function findMinMax(fiveDayForecast){
+    var minsAndMaxes = [];
+    var min = 9999;
+    var max = 0;
+    var day = parseInt(fiveDayForecast.list[0].dt_txt.slice(8,10));
+    var count = 0;
+    //loop through fiveDayForecasts.list
+    while(count < fiveDayForecast.list.length){
+        //If its a different day and the min and max do not equal 0 and 9999 respectively since we are setting them absolutely
+        if(day !== parseInt(fiveDayForecast.list[count].dt_txt.slice(8,10)) && max !== 0 && min !== 9999) {
+            //Then add that new information to the end of the minsAndMaxes array
+            minsAndMaxes.push({min_temp: min, max_temp: max});
+            //update the new day, and reset min/max
+            day = parseInt(fiveDayForecast.list[count].dt_txt.slice(8,10));
+            min = 9999;
+            max = 0;
+        }
+        else if(min > fiveDayForecast.list[count].main.temp_min){
+            min = fiveDayForecast.list[count].main.temp_min;
+        }
+        else if(max < fiveDayForecast.list[count].main.temp_max){
+            max = fiveDayForecast.list[count].main.temp_max;
+        }
+        count++;
+    }
+    return(minsAndMaxes);
+}
+
+
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Server Has Started!") ;
