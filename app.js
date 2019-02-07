@@ -121,17 +121,24 @@ function findMinMax(fiveDayForecast){
     var count = 0;
     //loop through fiveDayForecasts.list
     while(count < fiveDayForecast.list.length){
-        //If its a different day and the min and max do not equal 0 and 9999 respectively since we are setting them absolutely
-        if(day !== parseInt(fiveDayForecast.list[count].dt_txt.slice(8,10)) && max !== 0 && min !== 9999) {
+        //Check if hour reaches last entry which is 21 OR it's a new day AND max temp is not equal to 0
+        if((parseInt(fiveDayForecast.list[count].dt_txt.slice(11,13)) === 21 || day !== parseInt(fiveDayForecast.list[count].dt_txt.slice(8,10))) && max !== 0) {
+            //check the true min and max on last time
+            if(min > fiveDayForecast.list[count].main.temp_min){
+                min = fiveDayForecast.list[count].main.temp_min;
+            }
+            else if(max < fiveDayForecast.list[count].main.temp_max){
+                max = fiveDayForecast.list[count].main.temp_max;
+            } 
             //Then add that new information to the end of the minsAndMaxes array
-            minsAndMaxes.push({min_temp: min, max_temp: max});
+            minsAndMaxes.push({ date: fiveDayForecast.list[count].dt_txt, min_temp: min, max_temp: max});
             //update the new day, and reset min/max
             day = parseInt(fiveDayForecast.list[count].dt_txt.slice(8,10));
             min = 9999;
             max = 0;
         }
         else if(min > fiveDayForecast.list[count].main.temp_min){
-            min = fiveDayForecast.list[count].main.temp_min;
+             min = fiveDayForecast.list[count].main.temp_min;
         }
         else if(max < fiveDayForecast.list[count].main.temp_max){
             max = fiveDayForecast.list[count].main.temp_max;
