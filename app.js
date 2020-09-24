@@ -8,7 +8,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     flash = require("connect-flash"),
     request = require('request');
-    
+
 //SCHEMA SETUP
 
 var fiveDaySchema = mongoose.Schema({
@@ -22,8 +22,8 @@ var fiveDaySchema = mongoose.Schema({
 });
 
 var FiveDayForecast = mongoose.model("FiveDayForecast", fiveDaySchema);
-    
-var url = process.env.DATABASEURL || "mongodb://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@ds029821.mlab.com:29821/weather_app_project";
+
+var url = process.env.DATABASEURL || "mongodb+srv://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@weather-app-project.vmoyg.mongodb.net/weather_app_project?retryWrites=true&w=majority";
 mongoose.connect(url, { useNewUrlParser: true });
 
 app.use(flash());
@@ -42,13 +42,14 @@ app.use(function(req, res, next){
     res.locals.moment = require("moment");
     res.locals.error = req.flash("error");
     next();
-}); 
+});
 
 
 
 //INDEX ROUTE
 app.get("/", function(req, res){
-    clearDB();
+   // Get rid of the DB part of this app...
+   //clearDB();
     res.render("landing");
 });
 
@@ -72,7 +73,7 @@ app.post("/weather", function(req, res) {
                 FiveDayForecast.create(newFiveDayForecast, function(err, newlyCreated) {
                     var minsAndMaxes;
                     if (err) {
-                        req.flash("error", "Please enter a valid zip code!");
+                        req.flash("error", "There was an issue getting your weather forecasts");
                         res.redirect("/");
                     } else if(newFiveDayForecast.message === "city not found") {
                         req.flash("error", "City was not found. Please try again.");
@@ -99,6 +100,7 @@ function clearDB() {
             console.log(err);
         }
         else {
+           console.log('db', db)
             db.collection('fivedayforecasts').deleteMany(function(err, result) {
                 if (err) {
                     console.log(err);
@@ -129,7 +131,7 @@ function findMinMax(fiveDayForecast){
             }
             else if(max < fiveDayForecast.list[count].main.temp_max){
                 max = fiveDayForecast.list[count].main.temp_max;
-            } 
+            }
             //Then add that new information to the end of the minsAndMaxes array
             minsAndMaxes.push({ date: fiveDayForecast.list[count].dt_txt, min_temp: min, max_temp: max});
             //update the new day, and reset min/max
