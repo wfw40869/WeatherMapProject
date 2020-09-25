@@ -24,11 +24,23 @@ Each Forecast is pulled from OpenWeatherMaps.org
 - Add better icons for weather
 - Make forecasts display in grid
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> acd98454c6077ef1567cf18594a45def7329e4e8
 ## Style Navbar and Form
 
 - Add a navbar to all templates
 - Style enter zip code form
 
+<<<<<<< HEAD
+=======
+## Add Mongoose
+- Install and configure Mongoose
+- Setup forecast model
+- Use model inside of routes
+
+>>>>>>> acd98454c6077ef1567cf18594a45def7329e4e8
 ## Validate Zip Code Entry
 - Create function to validate zip code entry
 - Include funtion in POST route
