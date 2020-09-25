@@ -2,8 +2,8 @@
 
 ## Initial Setup
 
--Add Landing Page for User to Enter Zip Code
--Add Home Page Which Lists 5-day Forecast
+- Add Landing Page for User to Enter Zip Code
+- Add Home Page Which Lists 5-day Forecast
 
 Each Forecast is pulled from OpenWeatherMaps.org
 
